@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="listOfNoteArray">
+        <item> Пустая заметка </item>
+        <item> Рецепты </item>
+        <item> Анекдоты </item>
+        <item> Надо сделать </item>
+    </string-array>
+
+    <string-array name="NoteArray">
+        <item> Пусто </item>
+        <item> Пирог с вишней </item>
+        <item> Встретилься как то русский, Американец и Еврей </item>
+        <item> Купить лампочку в большую комнату </item>
+    </string-array>
+
+</resources>

@@ -1,19 +1,25 @@
 package com.gb.alkhelm.mystudynotes;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class ListNoteFragment extends Fragment {
 
+
     public static ListNoteFragment newInstance() {
         ListNoteFragment fragment = new ListNoteFragment();
+
         return fragment;
     }
 
@@ -27,5 +33,32 @@ public class ListNoteFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        String[] listNote = getResources().getStringArray(R.array.listOfNoteArray); // Создали массив строк, для него вызываем получить ресурсы.получить массив строк (R.array.имя)
+
+        for (int i = 0; i < listNote.length; i++) {
+            String listNoteName = listNote[i];
+            TextView textView = new TextView(getContext()); // создали новый textView привязанный к контексту нашего активити
+            textView.setTextSize(30f);
+            textView.setText(listNoteName);
+            ((LinearLayout) view).addView(textView);
+
+            final int finalI = i;
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Note note = new Note(finalI);
+                    if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        NoteFragment noteFragment = NoteFragment.newInstance(note);
+                        // Отображаем фрагмент: т.к. мы находимся внутри фрагмента, сначала вызываем активити getActivity()
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.notes,noteFragment).commit();
+                    } else {
+                        NoteFragment noteFragment = NoteFragment.newInstance(note);
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.listNote,noteFragment).addToBackStack("").commit(); // addToBackstack - фрейм с записками (notes) накладывается поверх фрейма со списком заметок (listNote)
+                    }
+                }
+            });
+
+        }
     }
 }
