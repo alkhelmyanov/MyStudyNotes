@@ -33,7 +33,11 @@ public class ListNoteFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initView((LinearLayout) view);
+    }
 
+
+    private void initView(LinearLayout view) {
         String[] listNote = getResources().getStringArray(R.array.listOfNoteArray); // Создали массив строк, для него вызываем получить ресурсы.получить массив строк (R.array.имя)
 
         for (int i = 0; i < listNote.length; i++) {
@@ -41,7 +45,7 @@ public class ListNoteFragment extends Fragment {
             TextView textView = new TextView(getContext()); // создали новый textView привязанный к контексту нашего активити
             textView.setTextSize(30f);
             textView.setText(listNoteName);
-            ((LinearLayout) view).addView(textView);
+            view.addView(textView);
 
             final int finalI = i;
             textView.setOnClickListener(new View.OnClickListener() {
@@ -49,16 +53,24 @@ public class ListNoteFragment extends Fragment {
                 public void onClick(View view) {
                     Note note = new Note(finalI);
                     if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                        NoteFragment noteFragment = NoteFragment.newInstance(note);
-                        // Отображаем фрагмент: т.к. мы находимся внутри фрагмента, сначала вызываем активити getActivity()
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.notes,noteFragment).commit();
+                        showLandscape(note);
                     } else {
-                        NoteFragment noteFragment = NoteFragment.newInstance(note);
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.listNote,noteFragment).addToBackStack("").commit(); // addToBackstack - фрейм с записками (notes) накладывается поверх фрейма со списком заметок (listNote)
+                        showPort(note);
                     }
                 }
             });
 
         }
+    }
+
+    private void showPort(Note note) {
+        NoteFragment noteFragment = NoteFragment.newInstance(note);
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.listNote, noteFragment).addToBackStack("").commit(); // addToBackstack - фрейм с записками (notes) накладывается поверх фрейма со списком заметок (listNote)
+    }
+
+    private void showLandscape(Note note) {
+        NoteFragment noteFragment = NoteFragment.newInstance(note);
+        // Отображаем фрагмент: т.к. мы находимся внутри фрагмента, сначала вызываем активити getActivity()
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.notes, noteFragment).commit();
     }
 }
