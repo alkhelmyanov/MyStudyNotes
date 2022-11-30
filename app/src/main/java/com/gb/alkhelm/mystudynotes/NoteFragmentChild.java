@@ -2,7 +2,6 @@ package com.gb.alkhelm.mystudynotes;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class NoteFragment extends Fragment {
+public class NoteFragmentChild extends Fragment {
 
     public static final String KEY_NOTE = "key_note";
     private Note note;
 
-    public static NoteFragment newInstance(Note note) {
-        NoteFragment fragment = new NoteFragment();
+    public static NoteFragmentChild newInstance(Note note) {
+        NoteFragmentChild fragment = new NoteFragmentChild();
         Bundle bundle = new Bundle();
         bundle.putParcelable(KEY_NOTE, note);
         fragment.setArguments(bundle);
@@ -29,7 +28,7 @@ public class NoteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_note, container, false);
+        return inflater.inflate(R.layout.fragment_note_child, container, false);
     }
 
     @SuppressLint("WrongConstant")
@@ -38,13 +37,10 @@ public class NoteFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         note = getArguments().getParcelable(KEY_NOTE);
 
-      getChildFragmentManager().beginTransaction().replace(R.id.note_child_container,NoteFragmentChild.newInstance(note) ).commit(); // вызываем ChildFragmentManager для доступа к фрагменту ребенка.
+        String[] listNote = getResources().getStringArray(R.array.NoteArray);
+        String listNoteName = listNote[note.getNoteIndex()];
+        TextView textView = view.findViewById(R.id.NoteTextView);
+        textView.setText(listNoteName);
 
-        view.findViewById(R.id.btnBack).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                requireActivity().getSupportFragmentManager().popBackStack();
-            }
-        });
     }
 }

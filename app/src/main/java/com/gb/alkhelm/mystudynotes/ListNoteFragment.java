@@ -44,6 +44,7 @@ public class ListNoteFragment extends Fragment {
             String listNoteName = listNote[i];
             TextView textView = new TextView(getContext()); // создали новый textView привязанный к контексту нашего активити
             textView.setTextSize(30f);
+            textView.setGravity(1);
             textView.setText(listNoteName);
             view.addView(textView);
 

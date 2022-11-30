@@ -5,18 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:layout_margin="5dp"
     tools:context=".ListNoteFragment">
 
-<FrameLayout
-    android:id="@+id/note_child_container"
+<TextView
+    android:id="@+id/NoteTextView"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content" />
 
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/Button_back" />
 </LinearLayout>
