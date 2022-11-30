@@ -42,5 +42,12 @@ public class NoteFragment extends Fragment {
         String listNoteName = listNote[note.getNoteIndex()];
         TextView textView = view.findViewById(R.id.NoteTextView);
         textView.setText(listNoteName);
+
+        view.findViewById(R.id.btnBack).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requireActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
     }
 }
