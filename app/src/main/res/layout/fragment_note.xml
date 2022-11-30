@@ -10,7 +10,8 @@
 <FrameLayout
     android:id="@+id/note_child_container"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginTop"/>
 
 
     <com.google.android.material.button.MaterialButton

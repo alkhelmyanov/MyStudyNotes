@@ -40,7 +40,7 @@ public class ListNoteFragment extends Fragment {
     private void initView(LinearLayout view) {
         String[] listNote = getResources().getStringArray(R.array.listOfNoteArray); // Создали массив строк, для него вызываем получить ресурсы.получить массив строк (R.array.имя)
 
-        for (int i = 0; i < listNote.length; i++) {
+        for (int i = 1; i < listNote.length; i++) { // i = 1, чтобы дефолтное значение не отображалось в списке
             String listNoteName = listNote[i];
             TextView textView = new TextView(getContext()); // создали новый textView привязанный к контексту нашего активити
             textView.setTextSize(30f);
@@ -67,6 +67,7 @@ public class ListNoteFragment extends Fragment {
     private void showPort(Note note) {
         NoteFragment noteFragment = NoteFragment.newInstance(note);
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.listNote, noteFragment).addToBackStack("").commit(); // addToBackstack - фрейм с записками (notes) накладывается поверх фрейма со списком заметок (listNote)
+
     }
 
     private void showLandscape(Note note) {
