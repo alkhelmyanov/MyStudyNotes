@@ -38,7 +38,12 @@ public class NoteFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         note = getArguments().getParcelable(KEY_NOTE);
 
-      getChildFragmentManager().beginTransaction().replace(R.id.note_child_container,NoteFragmentChild.newInstance(note) ).commit(); // вызываем ChildFragmentManager для доступа к фрагменту ребенка.
+        String[] listNoteTitle = getResources().getStringArray(R.array.listOfNoteArray);
+        String listNoteNameTitle = listNoteTitle[note.getNoteIndex()];
+        TextView textViewList = view.findViewById(R.id.noteTitle);
+        textViewList.setText(listNoteNameTitle);
+
+        getChildFragmentManager().beginTransaction().replace(R.id.note_child_container, NoteFragmentChild.newInstance(note)).commit(); // вызываем ChildFragmentManager для доступа к фрагменту ребенка.
 
         view.findViewById(R.id.btnBack).setOnClickListener(new View.OnClickListener() {
             @Override

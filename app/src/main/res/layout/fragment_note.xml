@@ -7,6 +7,12 @@
     android:gravity="center_horizontal"
     tools:context=".ListNoteFragment">
 
+    <TextView
+        android:id="@+id/noteTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/note_title_text_size" />
+
 <FrameLayout
     android:id="@+id/note_child_container"
     android:layout_width="wrap_content"

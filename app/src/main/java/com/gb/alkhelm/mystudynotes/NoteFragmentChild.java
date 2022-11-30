@@ -37,6 +37,8 @@ public class NoteFragmentChild extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         note = getArguments().getParcelable(KEY_NOTE);
 
+
+
         String[] listNote = getResources().getStringArray(R.array.NoteArray);
         String listNoteName = listNote[note.getNoteIndex()];
         TextView textView = view.findViewById(R.id.NoteTextView);
