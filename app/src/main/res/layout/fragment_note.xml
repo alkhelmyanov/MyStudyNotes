@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context=".ListNoteFragment">
 
     <TextView
@@ -13,11 +13,11 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/note_title_text_size" />
 
-<FrameLayout
-    android:id="@+id/note_child_container"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/marginTop"/>
+    <FrameLayout
+        android:id="@+id/note_child_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTop" />
 
 
     <com.google.android.material.button.MaterialButton

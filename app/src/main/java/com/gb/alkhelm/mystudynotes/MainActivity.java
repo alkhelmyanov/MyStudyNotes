@@ -12,7 +12,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         if (savedInstanceState == null) { // если активити новая...
             ListNoteFragment listNoteFragment = ListNoteFragment.newInstance();   // создаем новый фрагмент
             getSupportFragmentManager().beginTransaction().replace(R.id.listNote, listNoteFragment).commit(); // вызываем supportManager, начинаем транзакцию (замени наш ListNote фрагмент, на listNoteFragment объект которого мы создали выше), закоммитим.
@@ -21,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
                 //String [] listNote = getResources().getStringArray(R.array.listOfNoteArray); // TODO добавить элемент из массива в дефолт
                 Note defaultNote = new Note(0); // FIXME изменить атрибуты на индекс [0]
                 NoteFragment noteFragment = NoteFragment.newInstance(defaultNote);   // создаем еще один фрагмент
-                getSupportFragmentManager().beginTransaction().replace(R.id.notes,noteFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.notes, noteFragment).commit();
             }
         }
 
