@@ -30,7 +30,8 @@ public class NoteFragment extends Fragment {
     // Добавляем меню во врагмент
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu, menu);
+        inflater.inflate(R.menu.menu_fragment, menu); // надуватель.надувает
+        menu.findItem(R.id.action_about).setVisible(false); // выбираем элемент меню (action_about) и отключаем его видимость.
         super.onCreateOptionsMenu(menu, inflater);
     }
 
