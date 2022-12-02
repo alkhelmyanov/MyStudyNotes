@@ -1,8 +1,10 @@
 package com.gb.alkhelm.mystudynotes;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -20,9 +22,6 @@ public class MainActivity extends AppCompatActivity {
             ListNoteFragment listNoteFragment = ListNoteFragment.newInstance();   // создаем новый фрагмент
             getSupportFragmentManager().beginTransaction().replace(R.id.listNote, listNoteFragment).commit(); // вызываем supportManager, начинаем транзакцию (замени наш ListNote фрагмент, на listNoteFragment объект которого мы создали выше), закоммитим.
 
-            // Добавление кастомного тулбара
-            Toolbar toolbar = findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
 
             // добавляем вариант с ландшафтной ориентацией
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) { // если (получить ресурсы.получить конфигурацию.ориентация равна Landscape) то
@@ -32,6 +31,18 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.notes, noteFragment).commit();
             }
         }
+
+        // Добавление кастомного тулбара
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+
+        // Добавление "Бургера"
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.burger_open, R.string.burger_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
     }
 
     // Добавление меню в тулбар
