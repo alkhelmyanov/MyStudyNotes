@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     case (R.id.action_drawer_about): {
                         getSupportFragmentManager().beginTransaction().replace(R.id.listNote, new AboutFragment()).addToBackStack("").commit(); // открытие нового фрагмента "fragment_about"
-                        drawerLayout.close(); // Закрытие меню
+                        drawerLayout.close(); // Закрытие бокового меню после нажатия на "About"
                         return true;
                     }
                 }
