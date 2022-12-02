@@ -21,6 +21,7 @@ public class NoteFragment extends Fragment {
     public static final String KEY_NOTE = "key_note";
     private Note note;
 
+
     public static NoteFragment newInstance(Note note) {
         NoteFragment fragment = new NoteFragment();
         Bundle bundle = new Bundle();
@@ -67,7 +68,6 @@ public class NoteFragment extends Fragment {
         String listNoteNameTitle = listNoteTitle[note.getNoteIndex()];
         TextView textViewList = view.findViewById(R.id.noteTitle);
         textViewList.setText(listNoteNameTitle);
-
         getChildFragmentManager().beginTransaction().replace(R.id.note_child_container, NoteFragmentChild.newInstance(note)).commit(); // вызываем ChildFragmentManager для доступа к фрагменту ребенка.
 
         view.findViewById(R.id.btnBack).setOnClickListener(new View.OnClickListener() {
