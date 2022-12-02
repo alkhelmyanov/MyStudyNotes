@@ -2,6 +2,7 @@ package com.gb.alkhelm.mystudynotes;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -18,6 +19,11 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) { // если активити новая...
             ListNoteFragment listNoteFragment = ListNoteFragment.newInstance();   // создаем новый фрагмент
             getSupportFragmentManager().beginTransaction().replace(R.id.listNote, listNoteFragment).commit(); // вызываем supportManager, начинаем транзакцию (замени наш ListNote фрагмент, на listNoteFragment объект которого мы создали выше), закоммитим.
+
+            // Добавление кастомного тулбара
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
             // добавляем вариант с ландшафтной ориентацией
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) { // если (получить ресурсы.получить конфигурацию.ориентация равна Landscape) то
                 //String [] listNote = getResources().getStringArray(R.array.listOfNoteArray); // TODO добавить элемент из массива в дефолт

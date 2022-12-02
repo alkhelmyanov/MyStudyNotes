@@ -6,9 +6,11 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,7 +34,18 @@ public class NoteFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_fragment, menu); // надуватель.надувает
         menu.findItem(R.id.action_about).setVisible(false); // выбираем элемент меню (action_about) и отключаем его видимость.
+        menu.findItem(R.id.action_search).setVisible(false);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_share) {
+            Toast.makeText(requireContext(), "Заметка отправлена другу", Toast.LENGTH_SHORT).show(); // всплывающее сообщение
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
