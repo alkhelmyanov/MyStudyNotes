@@ -66,7 +66,7 @@ public class ListNoteFragment extends Fragment {
 
     private void showPort(Note note) {
         NoteFragment noteFragment = NoteFragment.newInstance(note);
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.listNote, noteFragment).addToBackStack("").commit(); // addToBackstack - фрейм с записками (notes) накладывается поверх фрейма со списком заметок (listNote)
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.listNote, noteFragment).addToBackStack("").commit();// вызов фрагмента // addToBackstack - фрейм с записками (notes) накладывается поверх фрейма со списком заметок (listNote)
 
     }
 

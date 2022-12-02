@@ -43,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case (R.id.action_about): {
-                return true;                 //TODO переход в фрагмент about
+                getSupportFragmentManager().beginTransaction().replace(R.id.listNote,new AboutFragment()).addToBackStack("").commit();
+                return true;
             }
             case (R.id.action_close):{
                 finish();
             }
         }
-
 
         return super.onOptionsItemSelected(item);
     }
