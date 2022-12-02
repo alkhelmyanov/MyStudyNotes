@@ -9,11 +9,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 
 public class NoteFragment extends Fragment {
@@ -62,7 +64,10 @@ public class NoteFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         note = getArguments().getParcelable(KEY_NOTE);
 
+        // Добавляем элементы в toolbar
         setHasOptionsMenu(true); // Говорим что у фрагмента есть свое меню. Обязательно!!!!!
+
+
 
         String[] listNoteTitle = getResources().getStringArray(R.array.listOfNoteArray);
         String listNoteNameTitle = listNoteTitle[note.getNoteIndex()];
@@ -74,6 +79,17 @@ public class NoteFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 requireActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+
+        // Добавление всплывающего меню по долгому клику
+        view.findViewById(R.id.btnBack).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(requireContext(),view); // создали попап меню (в контексте своего акитвити requireContext(), и заякорили его за нашу кнопку )
+                requireActivity().getMenuInflater().inflate(R.menu.menu_popup_btn, popupMenu.getMenu()); // в это меню задули каркас нашего меню и вызвали его
+                popupMenu.show();
+                return false;
             }
         });
     }
