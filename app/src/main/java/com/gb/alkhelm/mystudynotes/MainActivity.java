@@ -10,6 +10,9 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,11 +41,29 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
 
-        // Добавление "Бургера"
+        // Добавление "Бургера" (toggle)
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.burger_open, R.string.burger_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        NavigationView navigationView = findViewById(R.id.navigationView);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case (R.id.action_drawer_settings): {
+                        Toast.makeText(MainActivity.this, "Настройки", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                    case (R.id.action_drawer_about): {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.listNote, new AboutFragment()).addToBackStack("").commit(); // открытие нового фрагмента "fragment_about"
+                        drawerLayout.close(); // Закрытие меню
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     // Добавление меню в тулбар
@@ -59,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case (R.id.action_about): {
-                getSupportFragmentManager().beginTransaction().replace(R.id.listNote, new AboutFragment()).addToBackStack("").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.listNote, new AboutFragment()).addToBackStack("").commit(); // открытие нового фрагмента "fragment_about"
                 return true;
             }
             case (R.id.action_close): {
