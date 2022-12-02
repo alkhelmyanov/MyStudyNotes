@@ -47,6 +47,7 @@ public class NoteFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         note = getArguments().getParcelable(KEY_NOTE);
 
+        setHasOptionsMenu(true); // Говорим что у фрагмента есть свое меню. Обязательно!!!!!
 
         String[] listNoteTitle = getResources().getStringArray(R.array.listOfNoteArray);
         String listNoteNameTitle = listNoteTitle[note.getNoteIndex()];
