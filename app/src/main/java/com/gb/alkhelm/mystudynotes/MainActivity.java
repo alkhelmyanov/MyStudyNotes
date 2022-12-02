@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.notes, noteFragment).commit();
             }
         }
-
     }
 
     // Добавление меню в тулбар
@@ -43,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case (R.id.action_about): {
-                getSupportFragmentManager().beginTransaction().replace(R.id.listNote,new AboutFragment()).addToBackStack("").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.listNote, new AboutFragment()).addToBackStack("").commit();
                 return true;
             }
-            case (R.id.action_close):{
+            case (R.id.action_close): {
                 finish();
             }
         }
