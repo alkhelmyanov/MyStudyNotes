@@ -9,4 +9,8 @@
         android:id="@+id/action_drawer_about"
         android:icon="@drawable/ic_baseline_settings_accessibility_24"
         android:title="About" />
+    <item
+        android:id="@+id/action_drawer_rate"
+        android:icon="@drawable/ic_baseline_thumb_up_alt_24"
+        android:title="Rate the app" />
 </menu>
