@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ public class MyAlertDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         getActivity().finish(); // вызываем активити, и закрываем ее с помощью finish()
+                        Toast.makeText(requireActivity(), "Спасибо за использование приложения \"Заметки\"", Toast.LENGTH_LONG).show();
                     }
                 })
                 .setNegativeButton("Нет", new DialogInterface.OnClickListener() {
