@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
             case (R.id.action_close): {
-                finish();
+                new MyDialogFragment().show(getSupportFragmentManager(),""); // вызываем фрагмент MyDialogFragment
             }
         }
 
