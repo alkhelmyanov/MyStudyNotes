@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ListNoteFragment extends Fragment implements OnItemClickListener{
+public class ListNoteFragment extends Fragment implements OnItemClickListener {
 
     ListNoteAdapter listNoteAdapter;
 
@@ -49,8 +49,10 @@ public class ListNoteFragment extends Fragment implements OnItemClickListener{
     void initAdapter() {
         // 1. Создали пустой объект адаптера
         listNoteAdapter = new ListNoteAdapter();
+        LocalRepositoryImpl localRepository = new LocalRepositoryImpl(requireContext().getResources()).init();
         // 2. Передаем занчение в адаптер
-        listNoteAdapter.setData(getData());
+        //listNoteAdapter.setData(getData());
+        listNoteAdapter.setData(localRepository);
         listNoteAdapter.setOnItemClickListener(this); // (this) особенности call back, передача не объекта а его интерфеса
 
     }

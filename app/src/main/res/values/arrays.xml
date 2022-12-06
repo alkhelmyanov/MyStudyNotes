@@ -23,4 +23,11 @@
         Приготовить обед</item>
     </string-array>
 
+    <string-array name="NoteType">
+        <item> Пустая заметка </item>
+        <item> Рецепты </item>
+        <item> Анекдоты </item>
+        <item> Надо сделать </item>
+    </string-array>
+
 </resources>
