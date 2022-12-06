@@ -55,12 +55,12 @@ public class ListNoteAdapter extends RecyclerView.Adapter<ListNoteAdapter.MyView
             checkBox = (CheckBox) itemView.findViewById(R.id.favorite);
 
 
-            /*textView.setOnClickListener(new View.OnClickListener() {
+            textViewListItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     onItemClickListener.onItemClick(getAdapterPosition()); //
                 }
-            });*/
+            });
         }
 
         //Метод связывающий контент с макетом  fragment_list_note_item

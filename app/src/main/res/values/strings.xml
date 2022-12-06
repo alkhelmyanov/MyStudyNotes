@@ -8,4 +8,6 @@
 
     <string name="burger_open"> burger open</string>
     <string name="burger_close"> burger close</string>
+    <string name="favorite">Добавить в избранное</string>
+    <string name="note_type">Заметка</string>
 </resources>

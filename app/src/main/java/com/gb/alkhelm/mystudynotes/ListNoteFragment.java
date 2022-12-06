@@ -81,7 +81,16 @@ public class ListNoteFragment extends Fragment implements OnItemClickListener {
     public void onItemClick(int position) {
         String[] data = getData();
         Toast.makeText(requireContext(), "Нажали на " + data[position], Toast.LENGTH_SHORT).show();
+        {
+            Note note = new Note(position);
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                showLandscape(note);
+            } else {
+                showPort(note);
+            }
+        }
     }
+
 
     //  Старый код без RecycleView
 

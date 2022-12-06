@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="15dp"
+    android:layout_margin="10dp"
+    android:padding="20dp"
     app:cardElevation="15dp">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -15,7 +17,7 @@
             android:id="@+id/listItem"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@color/cardview_shadow_end_color"
+            android:background="@drawable/minimalizm"
             android:textSize="35sp"
             android:clickable="true"
             android:gravity="center"/>
@@ -30,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Добавить в избранное"
+                android:text="@string/favorite"
                 />
 
             <TextView
@@ -39,7 +41,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Заметка"/>
+                android:text="@string/note_type"/>
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
