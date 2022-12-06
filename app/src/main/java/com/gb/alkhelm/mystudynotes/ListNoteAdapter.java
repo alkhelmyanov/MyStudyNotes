@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ListNoteAdapter extends RecyclerView.Adapter<ListNoteAdapter.MyViewHolder> {
 
     private String[] data;
+    OnItemClickListener onItemClickListener;
 
     @NonNull
     @Override // Создает макет ViewHolder (9 штук)
@@ -34,6 +35,10 @@ public class ListNoteAdapter extends RecyclerView.Adapter<ListNoteAdapter.MyView
         notifyDataSetChanged(); // перерисовать все полученные данные (очень ресурсоемкий)
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
     //Прописываем свой ViewHolder
     class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView textView;
@@ -42,6 +47,12 @@ public class ListNoteAdapter extends RecyclerView.Adapter<ListNoteAdapter.MyView
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = (TextView) itemView;
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickListener.onItemClick(getAdapterPosition()); //
+                }
+            });
         }
 
         //Метод связывающий контент с макетом  fragment_list_note_item

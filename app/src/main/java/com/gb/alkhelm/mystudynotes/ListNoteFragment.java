@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ListNoteFragment extends Fragment {
+public class ListNoteFragment extends Fragment implements OnItemClickListener{
 
     ListNoteAdapter listNoteAdapter;
 
@@ -51,6 +51,8 @@ public class ListNoteFragment extends Fragment {
         listNoteAdapter = new ListNoteAdapter();
         // 2. Передаем занчение в адаптер
         listNoteAdapter.setData(getData());
+        listNoteAdapter.setOnItemClickListener(this); // (this) особенности call back, передача не объекта а его интерфеса
+
     }
 
     // Иницализируем Recycle
@@ -73,6 +75,11 @@ public class ListNoteFragment extends Fragment {
         return data;
     }
 
+    @Override
+    public void onItemClick(int position) {
+        String[] data = getData();
+        Toast.makeText(requireContext(), "Нажали на " + data[position], Toast.LENGTH_SHORT).show();
+    }
 
     //  Старый код без RecycleView
 
@@ -120,4 +127,6 @@ public class ListNoteFragment extends Fragment {
         // Отображаем фрагмент: т.к. мы находимся внутри фрагмента, сначала вызываем активити getActivity()
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.notes, noteFragment).commit();
     }
+
+
 }
