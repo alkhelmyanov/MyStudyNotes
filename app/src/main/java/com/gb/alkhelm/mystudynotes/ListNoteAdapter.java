@@ -7,6 +7,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ListNoteAdapter extends RecyclerView.Adapter<ListNoteAdapter.MyViewHolder> {
@@ -14,6 +15,14 @@ public class ListNoteAdapter extends RecyclerView.Adapter<ListNoteAdapter.MyView
     private CardsSource cardSource;
 
     OnItemClickListener onItemClickListener;
+
+    Fragment fragment;
+
+    private int menuPosition;
+
+    public int getMenuPosition() {
+        return menuPosition;
+    }
 
     @NonNull
     @Override // Создает макет ViewHolder (9 штук)
@@ -41,7 +50,11 @@ public class ListNoteAdapter extends RecyclerView.Adapter<ListNoteAdapter.MyView
         this.onItemClickListener = onItemClickListener;
     }
 
-    //Прописываем свой ViewHolder
+    ListNoteAdapter (Fragment fragment){
+        this.fragment = fragment;
+    }
+
+    //Прописываем свой ViewHolder (обрабатывает каждую конкретную менюшку)
     class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView textViewListItem;
         private TextView textViewNoteType;
@@ -54,6 +67,27 @@ public class ListNoteAdapter extends RecyclerView.Adapter<ListNoteAdapter.MyView
             textViewNoteType = (TextView) itemView.findViewById(R.id.noteType);
             checkBox = (CheckBox) itemView.findViewById(R.id.favorite);
 
+
+
+            // Устновлен дублирующий LongClickListener на ItemView чтобы можно было получить позицию клика
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    menuPosition = getLayoutPosition(); // записываем в menuPosition полученную позицию
+                    return false;
+                }
+            });
+
+            // Повесить контекстное меню на кликабельный объект
+            textViewListItem.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    menuPosition = getLayoutPosition(); // записываем в menuPosition полученную позицию
+                    // view.showContextMenu(); // выводит на экран контекстное меню
+                    return false; // после клика выполнение кода продолжается
+                }
+            });
+            fragment.registerForContextMenu(itemView); // зарегистрировать контекстное меню на itemView (на всю карточку). После чего клики на itemView буду приводить к срабатыванию у фрагмента onContextItemSelected и будут вызываться меню прописанные в onCreateContextMenu
 
             textViewListItem.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -3,6 +3,7 @@ package com.gb.alkhelm.mystudynotes;
 import android.content.res.Resources;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class LocalRepositoryImpl implements CardsSource {
@@ -19,7 +20,7 @@ public class LocalRepositoryImpl implements CardsSource {
         String[] listItem = resources.getStringArray(R.array.listOfNoteArray);
 
         for (int i = 0; i < listItem.length; i++) {
-            dataSource.add(new CardData(listItem[i], "Заметка", false));
+            dataSource.add(new CardData(listItem[i], "Заметка", false, Calendar.getInstance().getTime()));
         }
         return this;
     }

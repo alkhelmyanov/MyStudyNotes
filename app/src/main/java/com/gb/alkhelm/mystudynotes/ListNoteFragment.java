@@ -9,18 +9,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Parcelable;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class ListNoteFragment extends Fragment implements OnItemClickListener {
+import java.util.Calendar;
+
+public class ListNoteFragment extends Fragment implements OnItemClickListener, Observer {
 
     ListNoteAdapter listNoteAdapter;
     CardsSource data;
@@ -48,22 +48,49 @@ public class ListNoteFragment extends Fragment implements OnItemClickListener {
 
 
     }
-        //Добавляем наше меню во фрагмент
+
+    //Добавляем наше меню во фрагмент
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu,menu); // шаблон менюшки R.menu.menu.xml инфлейтим в menu
+        inflater.inflate(R.menu.menu, menu); // шаблон менюшки R.menu.menu.xml инфлейтим в menu
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    // Добавляем обработку кликов в меню
+    // Добавление контекстного меню во фрагмент
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
 
+        super.onCreateContextMenu(menu, v, menuInfo);
+        requireActivity().getMenuInflater().inflate(R.menu.menu_card, menu);
+    }
+
+    // Обработка кликов контекстного меню
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        int menuPosition = listNoteAdapter.getMenuPosition();
+
+        switch (item.getItemId()) {
+            case R.id.action_update: {
+                    //TODO создать фрагмент с навигацией. Сделать обновление этого фрагмента.
+                return true;
+            }
+            case R.id.action_delete: {
+                data.deleteCardData(menuPosition);
+                listNoteAdapter.notifyItemRemoved(menuPosition);
+                return true;
+            }
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    // Добавляем обработку кликов в меню
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_addNote:{
-            data.addCardData(new CardData("Новая заметка урок 11", "Заметка 11", false));
-            //listNoteAdapter.notifyDataSetChanged(); // заменят все карточки
-            listNoteAdapter.notifyItemInserted(data.size()-1); // заменит только последнюю карточку
+        switch (item.getItemId()) {
+            case R.id.action_addNote: {
+                data.addCardData(new CardData("Новая заметка урок 11", "Заметка 11", false, Calendar.getInstance().getTime()));
+                //listNoteAdapter.notifyDataSetChanged(); // заменят все карточки
+                listNoteAdapter.notifyItemInserted(data.size() - 1); // заменит только последнюю карточку
                 return true;
             }
         }
@@ -76,7 +103,7 @@ public class ListNoteFragment extends Fragment implements OnItemClickListener {
     //Инициализируем Адаптер
     void initAdapter() {
         // 1. Создали пустой объект адаптера
-        listNoteAdapter = new ListNoteAdapter();
+        listNoteAdapter = new ListNoteAdapter(this); // this - фрагмент передает (записывает) себя в переменную фрагмента, потом на эту переменную вешает контекстное меню
         data = new LocalRepositoryImpl(requireContext().getResources()).init();
         // 2. Передаем занчение в адаптер
         //listNoteAdapter.setData(getData());
@@ -167,5 +194,9 @@ public class ListNoteFragment extends Fragment implements OnItemClickListener {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.notes, noteFragment).commit();
     }
 
+    // Подготовили возможность принимать cardData
+    @Override
+    public void receiveMessage(CardData cardData) {
 
+    }
 }
