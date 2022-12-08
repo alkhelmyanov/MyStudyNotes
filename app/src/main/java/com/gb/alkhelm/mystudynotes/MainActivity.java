@@ -18,6 +18,12 @@ public class MainActivity extends AppCompatActivity implements OnDialogListener 
 
     private Publisher publisher;
 
+    public Navigation getNavigation() {
+        return navigation;
+    }
+
+    private Navigation navigation;
+
     public Publisher getPublisher() {
         return publisher;
     }
@@ -27,9 +33,10 @@ public class MainActivity extends AppCompatActivity implements OnDialogListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_drawer);
         publisher = new Publisher();
+        navigation = new Navigation(getSupportFragmentManager());
         if (savedInstanceState == null) { // если активити новая...
             ListNoteFragment listNoteFragment = ListNoteFragment.newInstance();   // создаем новый фрагмент
-            getSupportFragmentManager().beginTransaction().replace(R.id.listNote, listNoteFragment).commit(); // вызываем supportManager, начинаем транзакцию (замени наш ListNote фрагмент, на listNoteFragment объект которого мы создали выше), закоммитим.
+            navigation.replaceFragment(listNoteFragment, false); // вызываем supportManager, начинаем транзакцию (замени наш ListNote фрагмент, на listNoteFragment объект которого мы создали выше), закоммитим.
 
 
             // добавляем вариант с ландшафтной ориентацией
@@ -37,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogListener 
                 //String [] listNote = getResources().getStringArray(R.array.listOfNoteArray); // TODO добавить элемент из массива в дефолт
                 Note defaultNote = new Note(0);
                 NoteFragment noteFragment = NoteFragment.newInstance(defaultNote);   // создаем еще один фрагмент
-                getSupportFragmentManager().beginTransaction().replace(R.id.notes, noteFragment).commit();
+                navigation.replaceFragment(noteFragment,false);
             }
         }
 
