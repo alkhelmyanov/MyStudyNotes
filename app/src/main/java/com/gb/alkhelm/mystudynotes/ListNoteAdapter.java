@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ListNoteAdapter extends RecyclerView.Adapter<ListNoteAdapter.MyViewHolder> {
 
-    private CardSource cardSource;
+    private CardsSource cardSource;
 
     OnItemClickListener onItemClickListener;
 
@@ -32,7 +32,7 @@ public class ListNoteAdapter extends RecyclerView.Adapter<ListNoteAdapter.MyView
         return cardSource.size();
     }
 
-    public void setData(CardSource cardSource) {
+    public void setData(CardsSource cardSource) {
         this.cardSource = cardSource;
         notifyDataSetChanged(); // перерисовать все полученные данные (очень ресурсоемкий)
     }

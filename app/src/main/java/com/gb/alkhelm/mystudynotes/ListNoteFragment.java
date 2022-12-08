@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Parcelable;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -20,6 +23,7 @@ import android.widget.Toast;
 public class ListNoteFragment extends Fragment implements OnItemClickListener {
 
     ListNoteAdapter listNoteAdapter;
+    CardsSource data;
 
     public static ListNoteFragment newInstance() {
         ListNoteFragment fragment = new ListNoteFragment();
@@ -40,8 +44,32 @@ public class ListNoteFragment extends Fragment implements OnItemClickListener {
 
         initAdapter();
         initRecycler(view);
+        setHasOptionsMenu(true); // говорим явно что у фрагмента есть свое меню
+
 
     }
+        //Добавляем наше меню во фрагмент
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu,menu); // шаблон менюшки R.menu.menu.xml инфлейтим в menu
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    // Добавляем обработку кликов в меню
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_addNote:{
+            data.addCardData(new CardData("Новая заметка урок 11", "Заметка 11", false));
+            //listNoteAdapter.notifyDataSetChanged(); // заменят все карточки
+            listNoteAdapter.notifyItemInserted(data.size()-1); // заменит только последнюю карточку
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     // Работаем с RecycleView который позволяет ПЕРЕиспользовать его элементы
 
@@ -49,10 +77,10 @@ public class ListNoteFragment extends Fragment implements OnItemClickListener {
     void initAdapter() {
         // 1. Создали пустой объект адаптера
         listNoteAdapter = new ListNoteAdapter();
-        LocalRepositoryImpl localRepository = new LocalRepositoryImpl(requireContext().getResources()).init();
+        data = new LocalRepositoryImpl(requireContext().getResources()).init();
         // 2. Передаем занчение в адаптер
         //listNoteAdapter.setData(getData());
-        listNoteAdapter.setData(localRepository);
+        listNoteAdapter.setData(data);
         listNoteAdapter.setOnItemClickListener(this); // (this) особенности call back, передача не объекта а его интерфеса
 
     }

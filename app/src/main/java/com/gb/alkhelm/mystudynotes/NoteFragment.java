@@ -37,7 +37,7 @@ public class NoteFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_fragment, menu); // надуватель.надувает
         menu.findItem(R.id.action_about).setVisible(false); // выбираем элемент меню (action_about) и отключаем его видимость.
-        menu.findItem(R.id.action_search).setVisible(false);
+        menu.findItem(R.id.action_addNote).setVisible(false);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

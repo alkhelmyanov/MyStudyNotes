@@ -5,7 +5,7 @@ import android.content.res.Resources;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocalRepositoryImpl implements CardSource {
+public class LocalRepositoryImpl implements CardsSource {
 
     private List<CardData> dataSource;
     private Resources resources;
@@ -40,5 +40,23 @@ public class LocalRepositoryImpl implements CardSource {
     @Override
     public CardData getCardData(int position) {
         return dataSource.get(position);
+    }
+
+    //Добавление новой карточки
+    @Override
+    public void addCardData(CardData cardData) {
+        dataSource.add(cardData);
+    }
+
+    // Удаление карточки по позиции
+    @Override
+    public void deleteCardData(int position) {
+        dataSource.remove(position);
+    }
+
+    // Изменение карточки по позиции
+    @Override
+    public void updateCardData(int position, CardData newCardData) {
+        dataSource.set(position, newCardData);
     }
 }

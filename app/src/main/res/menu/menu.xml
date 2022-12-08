@@ -14,9 +14,9 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_search"
-        android:icon="@android:drawable/ic_menu_search"
-        android:title="search"
+        android:id="@+id/action_addNote"
+        android:icon="@drawable/ic_baseline_add_to_photos_24"
+        android:title="add Note"
         app:showAsAction="always" />
 
 </menu>
