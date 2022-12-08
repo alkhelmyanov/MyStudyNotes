@@ -6,6 +6,14 @@ import android.os.Parcelable;
 import java.util.Date;
 
 public class CardData implements Parcelable {
+    public void setListItem(String listItem) {
+        this.listItem = listItem;
+    }
+
+    public void setNoteType(String noteType) {
+        this.noteType = noteType;
+    }
+
     private String listItem;
     private String noteType;
     private Boolean favorite;

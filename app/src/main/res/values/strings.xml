@@ -10,4 +10,8 @@
     <string name="burger_close"> burger close</string>
     <string name="favorite">Добавить в избранное</string>
     <string name="note_type">Заметка</string>
+    <string name="btn_save_note">SAVE NOTE</string>
+    <string name="editnotetextview">Содержание заметки</string>
+    <string name="editnotetype">Тип заметки</string>
+    <string name="editlistnoteitem">Тема заметки</string>
 </resources>

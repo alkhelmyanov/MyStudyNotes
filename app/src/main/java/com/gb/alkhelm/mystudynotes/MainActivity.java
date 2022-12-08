@@ -16,18 +16,24 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements OnDialogListener {
 
+    private Publisher publisher;
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_drawer);
-
+        publisher = new Publisher();
         if (savedInstanceState == null) { // если активити новая...
             ListNoteFragment listNoteFragment = ListNoteFragment.newInstance();   // создаем новый фрагмент
             getSupportFragmentManager().beginTransaction().replace(R.id.listNote, listNoteFragment).commit(); // вызываем supportManager, начинаем транзакцию (замени наш ListNote фрагмент, на listNoteFragment объект которого мы создали выше), закоммитим.
 
 
             // добавляем вариант с ландшафтной ориентацией
-            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) { // если (получить ресурсы.получить конфигурацию.ориентация равна Landscape) то
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) { // если (получить ресурсы.получить конфигурацию.ориентация равна Landscape) то:
                 //String [] listNote = getResources().getStringArray(R.array.listOfNoteArray); // TODO добавить элемент из массива в дефолт
                 Note defaultNote = new Note(0);
                 NoteFragment noteFragment = NoteFragment.newInstance(defaultNote);   // создаем еще один фрагмент
@@ -84,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogListener 
                 return true;
             }
             case (R.id.action_close): {
-                new MyAlertDialogFragment().show(getSupportFragmentManager(),""); // вызываем фрагмент MyDialogFragment
+                new MyAlertDialogFragment().show(getSupportFragmentManager(), ""); // вызываем фрагмент MyDialogFragment
             }
         }
 

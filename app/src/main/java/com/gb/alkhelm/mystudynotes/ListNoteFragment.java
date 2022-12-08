@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-public class ListNoteFragment extends Fragment implements OnItemClickListener, Observer {
+public class ListNoteFragment extends Fragment implements OnItemClickListener {
 
     ListNoteAdapter listNoteAdapter;
     CardsSource data;
@@ -71,7 +71,18 @@ public class ListNoteFragment extends Fragment implements OnItemClickListener, O
 
         switch (item.getItemId()) {
             case R.id.action_update: {
-                    //TODO создать фрагмент с навигацией. Сделать обновление этого фрагмента.
+                //TODO создать фрагмент с навигацией. Сделать обновление этого фрагмента.
+
+                Observer observer = new Observer() {
+                    @Override
+                    public void receiveMessage(CardData cardData) {
+                        ((MainActivity) requireActivity()).getPublisher().unsubscribe(this);
+                        data.updateCardData(menuPosition,cardData);
+                        listNoteAdapter.notifyItemChanged(menuPosition);
+                    }
+                };
+                ((MainActivity) requireActivity()).getPublisher().subscribe(observer);
+                ((MainActivity) requireActivity()).getSupportFragmentManager().beginTransaction().add(R.id.listNote, EditNoteFragment.newInstance(data.getCardData(menuPosition))).addToBackStack("").commit();
                 return true;
             }
             case R.id.action_delete: {
@@ -194,9 +205,5 @@ public class ListNoteFragment extends Fragment implements OnItemClickListener, O
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.notes, noteFragment).commit();
     }
 
-    // Подготовили возможность принимать cardData
-    @Override
-    public void receiveMessage(CardData cardData) {
 
-    }
 }
